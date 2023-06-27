@@ -4,13 +4,25 @@ import {
     View,
     TouchableOpacity,
     Text,
+    FlatList,
+    Modal,
+    Pressable
 } from "react-native";
 import React, { useState } from "react";
+
+const renderItemTask = ({item}) => {
+    return (
+        <View style={styles.task} key={item.id}>
+            <Text style={styles.taskText}>{item.task}</Text>
+        </View>
+    )
+}
 
 const MainScreen = ({ taskList }) => {
 
     const [list, setList] = useState(taskList)
     const [input, setInput] = useState("")
+    const [modalVisible, setModalVisible] = useState(false);
 
     const onAddTask = () => {
         console.log("Se agregó una task");
@@ -43,12 +55,38 @@ const MainScreen = ({ taskList }) => {
                 </TouchableOpacity>
             </View>
             <View style={styles.view2}>
-                {list.map((item) => (
-                    <View style={styles.task} key={item.id}>
-                        <Text style={styles.taskText}>{item.task}</Text>
-                    </View>
-                ))}
+                <FlatList
+                    data = {list}
+                    keyExtractor={task => task.id}
+                    renderItem={renderItemTask}
+                />
+                {/* {list.map((item) => (
+                ))} */}
+                <Pressable
+                    style={[styles.button, styles.buttonOpen]}
+                    onPress={() => setModalVisible(true)}>
+                    <Text style={styles.textStyle}>Show Modal</Text>
+                </Pressable>
             </View>
+
+            <Modal
+                animationType="slide"
+                transparent={true}
+                visible={modalVisible}
+                onRequestClose={() => {
+                    setModalVisible(!modalVisible);
+                }}>
+                <View style={styles.centeredView}>
+                    <View style={styles.modalView}>
+                        <Text style={styles.modalText}>Hello World!</Text>
+                        <Pressable
+                        style={[styles.button, styles.buttonClose]}
+                        onPress={() => setModalVisible(!modalVisible)}>
+                            <Text style={styles.textStyle}>Hide Modal</Text>
+                        </Pressable>
+                    </View>
+                </View>
+            </Modal>
         </View>
     );
 };
@@ -80,7 +118,6 @@ const styles = StyleSheet.create({
         justifyContent: "flex-start",
         alignItems: "center",
         paddingVertical: 15,
-        gap: 20,
     },
     input: {
         width: 250,
@@ -103,7 +140,7 @@ const styles = StyleSheet.create({
         textAlign: "center",
     },
     task: {
-        width: "80%",
+        width: 200,
         backgroundColor: "azure",
         padding: 10,
         backgroundColor: "mediumpurple",
@@ -111,8 +148,50 @@ const styles = StyleSheet.create({
         borderColor: "#000",
         borderBottomWidth: 3,
         borderRightWidth: 3,
+        marginBottom: 15,
     },
     taskText: {
         fontSize: 20,
+    },
+    centeredView: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 22,
+      },
+    modalView: {
+    margin: 20,
+    backgroundColor: 'white',
+    borderRadius: 20,
+    padding: 35,
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+        width: 0,
+        height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+    },
+    button: {
+    borderRadius: 20,
+    padding: 10,
+    elevation: 2,
+    },
+    buttonOpen: {
+    backgroundColor: '#F194FF',
+    },
+    buttonClose: {
+    backgroundColor: '#2196F3',
+    },
+    textStyle: {
+    color: 'white',
+    fontWeight: 'bold',
+    textAlign: 'center',
+    },
+    modalText: {
+    marginBottom: 15,
+    textAlign: 'center',
     },
 });
