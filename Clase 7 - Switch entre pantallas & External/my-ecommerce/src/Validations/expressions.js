@@ -1,4 +1,4 @@
-const input = "!!.,.,"
+const input = "aksjdk123123X!#"
 
 //Only numbers
 const expression = /^[0-9]*$/

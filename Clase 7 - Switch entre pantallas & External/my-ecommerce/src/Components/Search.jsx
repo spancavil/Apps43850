@@ -3,9 +3,12 @@ import React, { useState } from 'react'
 import { FontAwesome } from '@expo/vector-icons';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { colors } from '../Global/Colors';
+import { AntDesign } from '@expo/vector-icons';
 
 const Search = ({
-    onSearch
+    onSearch,
+    error = "",
+    goBack
 }) => {
     const [keyword, setKeyword] = useState("")
 
@@ -22,6 +25,14 @@ const Search = ({
         <Pressable onPress={()=> setKeyword("")}>
             <FontAwesome5 name="eraser" size={24} color="black" />
         </Pressable>
+        <Pressable onPress={goBack}>
+            <AntDesign name="back" size={24} color="black" />
+        </Pressable>
+       { error ?
+         <Text>
+            {error}
+        </Text>
+        : null}
     </View>
   )
 }
