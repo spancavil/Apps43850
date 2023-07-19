@@ -8,7 +8,7 @@ const CartItem = ({ cartItem }) => {
     return (
         <View style={styles.card} onPress={() => {}}>
             <View style={styles.textContainer}>
-                <Text style={styles.text}>{cartItem.title}</Text>
+                <Text style={styles.text}>{cartItem.title} ({cartItem.quantity})</Text>
                 <Text style={styles.text2}>{cartItem.brand}</Text>
                 <Text style={styles.text2}>${cartItem.price}</Text>
             </View>
