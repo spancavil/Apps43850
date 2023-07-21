@@ -10,6 +10,7 @@ const Home = ({
 }) => {
   return (
     <View style={styles.container}>
+        <Counter/>
         <FlatList
             data = {categories}
             keyExtractor={category => category}
