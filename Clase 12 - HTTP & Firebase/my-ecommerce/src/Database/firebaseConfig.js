@@ -1,0 +1,1 @@
+export const realtime_database_url = ''
