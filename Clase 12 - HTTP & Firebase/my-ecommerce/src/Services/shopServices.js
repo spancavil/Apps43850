@@ -8,7 +8,7 @@ export const shopApi = createApi({
         getCategories: builder.query({
             query: () => `categories.json`
         }),
-        /* getProducts: builder.query({
+        getProducts: builder.query({
             query: () => `products.json`
         }),
         getProductsByCategory: builder.query({
@@ -33,7 +33,7 @@ export const shopApi = createApi({
                 method: `POST`,
                 body: order
             })
-        }), */
+        }),
     })
 })
 
