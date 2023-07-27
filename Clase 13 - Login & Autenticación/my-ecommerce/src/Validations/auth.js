@@ -1,9 +1,9 @@
-const isValidEmail = (emailInput) => {
+export const isValidEmail = (emailInput) => {
     const regex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/
     return regex.test(emailInput)
 }
 
-const isAtLeastSixCharacters = (input) => {
+export const isAtLeastSixCharacters = (input) => {
     const regex = /.{6,}/
     return regex.test(input)
 }
