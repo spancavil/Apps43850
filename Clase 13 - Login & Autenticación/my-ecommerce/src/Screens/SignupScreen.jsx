@@ -1,8 +1,11 @@
 import { Pressable, StyleSheet, Text, View } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import InputForm from "../Components/InputForm";
 import SubmitButton from "../Components/SubmitButton";
 import { colors } from "../Global/Colors";
+import { useSignUpMutation } from "../Services/authServices";
+import { useDispatch } from "react-redux";
+import { setUser } from "../Features/User/userSlice";
 /* import { useSignUpMutation } from "../services/authService";
 import { useDispatch } from "react-redux";
 import { setUser } from "../features/auth/authSlice";
@@ -16,8 +19,32 @@ const SignupScreen = ({ navigation }) => {
     const [confirmPassword, setconfirmPassword] = useState("");
     const [errorConfirmPassword, setErrorConfirmPassword] = useState("");
 
+    const [triggerSignUp, result] = useSignUpMutation()
+    const dispatch = useDispatch()
+
+    console.log(result);
+
+    useEffect(()=> {
+        if (result.isSuccess) {
+            dispatch(
+                setUser({
+                    email: result.data.email,
+                    idToken: result.data.idToken
+                })
+            )
+        }
+    }, [result])
+
     const onSubmit = () => {
         try {
+            console.log(email, password, confirmPassword);
+            const request = {
+                email,
+                password,
+                returnSecureToken: true
+            }
+            triggerSignUp(request)
+
             //Submit logic with validations
         } catch (err) {
             console.log("Catch error");
