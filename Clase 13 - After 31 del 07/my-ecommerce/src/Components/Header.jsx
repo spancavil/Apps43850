@@ -19,7 +19,7 @@ const Header = ({ route, navigation }) => {
     return (
         <View style={styles.containerHeader}>
             <Text style={styles.text}>{title}</Text>
-            {navigation.canGoBack() && route.name !== "Login" ? (
+            {navigation.canGoBack() ? (
                 <Pressable
                     style={styles.pressable}
                     onPress={() => navigation.goBack()}
