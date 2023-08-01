@@ -2,7 +2,6 @@ import { useFonts } from 'expo-font';
 import Navigator from './src/Navigation/Navigator';
 import { Provider } from 'react-redux';
 import store from './src/Store/store';
-import AuthStack from './src/Navigation/AuthStack';
 
 export default function App() {
 
