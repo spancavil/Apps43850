@@ -11,9 +11,9 @@ import { saveImage } from "../Features/User/userSlice";
 const ImageSelector = ({ navigation }) => {
     const [image, setImage] = useState(null);
 
-/*     const [triggerSaveImage, resultSaveImage] = usePostProfileImageMutation();
+    const [triggerSaveImage, resultSaveImage] = usePostProfileImageMutation();
     const dispatch = useDispatch();
-    const { localId } = useSelector((state) => state.userReducer.value); */
+    const { localId } = useSelector((state) => state.userReducer.value);
 
     const verifyCameraPermissions = async () => {
         const { granted } = await ImagePicker.requestCameraPermissionsAsync();
@@ -24,13 +24,16 @@ const ImageSelector = ({ navigation }) => {
     };
 
     const pickImage = async () => {
+
+        //Permission for camera
         const isCameraOk = await verifyCameraPermissions();
+
         if (isCameraOk) {
             // No permissions request is necessary for launching the image library
             let result = await ImagePicker.launchCameraAsync({
                 mediaTypes: ImagePicker.MediaTypeOptions.All,
                 allowsEditing: true,
-                aspect: [9, 16],
+                aspect: [1, 1],
                 //base64: true,
                 quality: 1,
             });
@@ -44,7 +47,7 @@ const ImageSelector = ({ navigation }) => {
     };
 
     const confirmImage = async () => {
-        /* try {
+        try {
             // Request device storage access permission
             const { status } = await MediaLibrary.requestPermissionsAsync();
             if (status === "granted") {
@@ -63,7 +66,7 @@ const ImageSelector = ({ navigation }) => {
         } catch (error) {
             console.log(error);
         }
-        navigation.goBack(); */
+        navigation.goBack();
     };
 
     return (
