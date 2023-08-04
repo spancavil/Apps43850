@@ -14,13 +14,36 @@ const LocationSelector = ({ navigation }) => {
     const [location, setLocation] = useState({ latitude: "", longitude: "" });
     const [error, setError] = useState("");
 
-    const [address, setAddress] = useState(null);
+    const [address, setAddress] = useState("");
+
+    const [triggerPostUserLocation, resultPostUserLocation] = usePostUserLocationMutation()
+    const {localId} = useSelector(state => state.userReducer.value)
+    const dispatch = useDispatch()
 
     /* const {localId} = useSelector(state => state.userReducer.value)
     const [triggerPostAddress, result] = usePostUserLocationMutation();
     const dispatch = useDispatch(); */
 
+    console.log(location);
+
     const onConfirmAddress = () => {
+
+        const locationFormatted = {
+            latitude: location.latitude,
+            longitude: location.longitude,
+            address
+        }
+
+        dispatch(setUserLocation(
+            locationFormatted
+        ))
+
+        triggerPostUserLocation({
+            location: locationFormatted,
+            localId
+        })
+
+        navigation.goBack()
         /* const locationFormatted = {
             latitude: location.latitude,
             longitude: location.longitude,
@@ -51,8 +74,8 @@ const LocationSelector = ({ navigation }) => {
                 console.log(error.message);
                 setError(error.message)
             }
-        })();
-    }, []);
+        })()
+    }, [])
 
     //Reverse geocoding
     useEffect(() => {
@@ -83,14 +106,14 @@ const LocationSelector = ({ navigation }) => {
                         style = {styles.text}
                     >Lat: {location.latitude}, long: {location.longitude}.
                     </Text>
-                    {/* <MapPreview location={location} />
+                    <MapPreview location={location} />
                     <Text style={styles.address}>
                         Formatted address: {address}
                     </Text>
                     <AddButton
                         onPress={onConfirmAddress}
                         title="Confirm address"
-                    /> */}
+                    />
                 </>
             ) : (
                 <>

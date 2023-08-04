@@ -10,7 +10,8 @@ export const userSlice = createSlice({
             profileImage: "",
             location: {
                 latitude: "",
-                longitude: ""
+                longitude: "",
+                address: ""
             },
         }
     },
@@ -26,7 +27,8 @@ export const userSlice = createSlice({
                 profileImage: "",
                 location: {
                     latitude: "",
-                    longitude: ""
+                    longitude: "",
+                    address: ""
                 },
             }
         },
