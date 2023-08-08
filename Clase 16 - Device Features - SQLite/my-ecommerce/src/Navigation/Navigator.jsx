@@ -36,7 +36,7 @@ const Navigator = () => {
     const dispatch = useDispatch()
 
     //Get stored sessions
-    /* useEffect(()=> {
+    useEffect(()=> {
         (async ()=> {
             try {
                 console.log('Getting session...');
@@ -52,7 +52,7 @@ const Navigator = () => {
                 console.log(error.message);
             }
         })()
-    }, []) */
+    }, [])
 
     return (
         <SafeAreaView style={styles.container}>

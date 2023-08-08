@@ -43,15 +43,17 @@ const LoginScreen = ({ navigation }) => {
         (async ()=> {
             try {
                 if(resultSignIn.isSuccess) {
+
                     //Insert session in SQLite database
-                    /* console.log('inserting Session');
+                    console.log('inserting Session');
                     const response = await insertSession({
-                        email: resultSignIn.data.email,
                         idToken: resultSignIn.data.idToken,
                         localId: resultSignIn.data.localId,
+                        email: resultSignIn.data.email,
                     })
                     console.log('Session inserted: ');
-                    console.log(response); */
+                    console.log(response);
+
                     dispatch(setUser({
                         email: resultSignIn.data.email,
                         idToken: resultSignIn.data.idToken,
